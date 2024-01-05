@@ -1,38 +1,99 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+* {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, 
+body {
+  margin-top: 40px;
+}
+
+h1{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.app-usuarios{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.contenedor-principal {
+  width: 800px;
+  min-height: 100px;
+  background-color: #d0d0d5;
+  padding: 25px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.contenedor-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
+.input {
+  flex: 1;   
+  width: 150px;
+  height: 28px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid black;
+  margin-right: 2px;
+  outline: none;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.input:last-child {
+  margin-right: 0;
+}
+
+.boton-agregar-usuario{
+    width: 100px;
+    padding: 5px;
+    font-size: 13;
+    color: white;
+    background-color: rgb(4, 0, 128);
+    box-sizing: border-box;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  background: none;
+  background-color: #d0d0d5;
+  width: 25%;
+}
+
+th {
+  background-color: #d0d0d5;
+}
+
+
+.boton-eliminar-editar{
+    font-size: 25px;
+    color: #d0d0d5;
+    margin:5px;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
 }
