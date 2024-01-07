@@ -1,37 +1,70 @@
-import './App.css';
+import "./App.css";
 import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
+import React, { useState } from "react";
+//import { editableInputTypes } from "@testing-library/user-event/dist/utils";
+//import { v4 as uuidv4 } from "uuid";
 
-
-let usuarios = [
-  ["Arian Rodriguez", 35, "06/12/1988"],
-  ["Yeni Delgado", 38, "27/01/1985"],
-  ["Arian Rodriguez", 35, "06/12/1988"],
-  ["Arian Rodriguez", 35, "06/12/1988"],
-];
+let usuarios = [];
 
 function App() {
+  const [nombre, setNombre] = useState("");
+  const [edad, setEdad] = useState("");
+  const [fechadenac, setFechadenac] = useState("");
+  const [botonEdit, setBotonEdit] = useState(false);
+  const [editedUser, setEditedUser] = useState('')
 
-const enviando = (e) => {
-  e.preventDefault();
-  console.log("Enviando");
-};
+  /* const manejandoForm = (e) => {
+    const { name, value } = e.target;
+    if (name === "nombre") setNombre(value);
+    else if (name === "edad") setEdad(value);
+    else if (name === "fechadenac") setFechadenac(value);
+  }; */
+
+  const enviando = (e) => {
+    e.preventDefault();
+    const nuevoUsuario = [nombre, parseInt(edad), fechadenac];
+    usuarios = [...usuarios, nuevoUsuario];
+    setNombre("");
+    setEdad("");
+    setFechadenac("");
+    console.log(nuevoUsuario);
+  };
+
+  const handleClick = (e) => {
+    setBotonEdit(!botonEdit);
+  };
 
   return (
     <>
       <div className="app-usuarios">
         <h1>Registro usuarios</h1>
         <div className="contenedor-principal">
-          <form className="contenedor-formulario">
-            <input className="input" placeholder="Introduce tu nombre"></input>
-            <input className="input" placeholder="Introduce tu edad"></input>
+          <form className="contenedor-formulario" onSubmit={enviando}>
+            <input
+              className="input"
+              placeholder="Introduce tu nombre"
+              name="nombre"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            ></input>
+            <input
+              className="input"
+              placeholder="Introduce tu edad"
+              name="edad"
+              value={edad}
+              onChange={(e) => setEdad(e.target.value)}
+            ></input>
             <input
               className="input"
               placeholder="Introduce tu fecha de nacimiento"
+              name="fechadenac"
+              value={fechadenac}
+              onChange={(e) => setFechadenac(e.target.value)}
             ></input>
             <div className="contenedor-boton">
-              <button className="boton-agregar-usuario" onClick={enviando}>
-                Agregar
+              <button className="boton-agregar-usuario">
+                {botonEdit ? "Gardar cambio" : "Agregar"}
               </button>
             </div>
           </form>
@@ -51,7 +84,10 @@ const enviando = (e) => {
                   <td>{usuario[1]}</td>
                   <td>{usuario[2]}</td>
                   <td className="editar-eliminar">
-                    <button className="boton-eliminar-editar">
+                    <button
+                      className="boton-eliminar-editar"
+                      onClick={handleClick}
+                    >
                       <BiEdit />
                     </button>
                     <button className="boton-eliminar-editar">
