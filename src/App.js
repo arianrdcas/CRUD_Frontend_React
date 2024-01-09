@@ -2,38 +2,34 @@ import "./App.css";
 import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 import React, { useState } from "react";
-//import { editableInputTypes } from "@testing-library/user-event/dist/utils";
-//import { v4 as uuidv4 } from "uuid";
-
-let usuarios = [];
 
 function App() {
-  const [nombre, setNombre] = useState("");
-  const [edad, setEdad] = useState("");
-  const [fechadenac, setFechadenac] = useState("");
-  const [botonEdit, setBotonEdit] = useState(false);
-  const [editedUser, setEditedUser] = useState('')
-
-  /* const manejandoForm = (e) => {
-    const { name, value } = e.target;
-    if (name === "nombre") setNombre(value);
-    else if (name === "edad") setEdad(value);
-    else if (name === "fechadenac") setFechadenac(value);
-  }; */
+  const [nombre, setNombre] = useState('');
+  const [edad, setEdad] = useState('');
+  const [fechadenac, setFechadenac] = useState('');
+  const [usuarios, setUsuarios] = useState([]);
 
   const enviando = (e) => {
     e.preventDefault();
-    const nuevoUsuario = [nombre, parseInt(edad), fechadenac];
-    usuarios = [...usuarios, nuevoUsuario];
+    const nuevoUsuario = {
+      nombre,
+      edad,
+      fechadenac,
+      id: usuarios.length
+    };
+    setUsuarios([...usuarios, nuevoUsuario]);
+
     setNombre("");
     setEdad("");
     setFechadenac("");
-    console.log(nuevoUsuario);
   };
+  
+  function eliminarUsuario(id){
+    const nuevosUsuario = usuarios.filter((usuario) => usuario.id !== id);
+    setUsuarios(nuevosUsuario);
+  }
 
-  const handleClick = (e) => {
-    setBotonEdit(!botonEdit);
-  };
+
 
   return (
     <>
@@ -64,7 +60,8 @@ function App() {
             ></input>
             <div className="contenedor-boton">
               <button className="boton-agregar-usuario">
-                {botonEdit ? "Gardar cambio" : "Agregar"}
+                Agregar
+                {/* {botonEdit ? "Gardar cambio" : "Agregar"} */}
               </button>
             </div>
           </form>
@@ -78,19 +75,19 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {usuarios.map((usuario, index) => (
-                <tr key={index}>
-                  <td>{usuario[0]}</td>
-                  <td>{usuario[1]}</td>
-                  <td>{usuario[2]}</td>
+              {usuarios.map((usuario, id) => (
+                <tr key={id}>
+                  <td>{usuario.nombre}</td>
+                  <td>{usuario.edad}</td>
+                  <td>{usuario.fechadenac}</td>
                   <td className="editar-eliminar">
-                    <button
-                      className="boton-eliminar-editar"
-                      onClick={handleClick}
-                    >
+                    <button className="boton-eliminar-editar">
                       <BiEdit />
                     </button>
-                    <button className="boton-eliminar-editar">
+                    <button
+                      className="boton-eliminar-editar"
+                      onClick={() => eliminarUsuario(usuario.id)}
+                    >
                       <BiTrash />
                     </button>
                   </td>
