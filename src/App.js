@@ -10,6 +10,14 @@ function App() {
   const [usuarios, setUsuarios] = useState([]);
   const [editingUserId, setEditingUserId] = useState(null);
 
+
+const handleKeyPress = (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+  }
+  enviando(e);
+};
+
   const enviando = (e) => {
     e.preventDefault();
     if (editingUserId !== null) {
@@ -31,6 +39,8 @@ function App() {
     setEdad("");
     setFechadenac("");
   };
+
+  
 
   const editarUsuario = (id) => {
     const toEditUsuario = usuarios.find((user) => user.id === id);
@@ -59,6 +69,7 @@ function App() {
               name="nombre"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
+              onKeyPress={handleKeyPress}
             ></input>
             <input
               className="input"
@@ -66,6 +77,7 @@ function App() {
               name="edad"
               value={edad}
               onChange={(e) => setEdad(e.target.value)}
+              onKeyPress={handleKeyPress}
             ></input>
             <input
               className="input"
@@ -73,10 +85,10 @@ function App() {
               name="fechadenac"
               value={fechadenac}
               onChange={(e) => setFechadenac(e.target.value)}
+              onKeyPress={handleKeyPress}
             ></input>
             <div className="contenedor-boton">
               <button className="boton-agregar-usuario">
-                
                 {editingUserId !== null ? "Actualizar" : "Agregar"}
               </button>
             </div>
