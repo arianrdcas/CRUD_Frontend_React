@@ -1,34 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../estilos-componentes/ListaUsuario.css";
 import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
+import { UserContext } from "../AppContext/UserContext";
 
-const ListaUsuario = ({
-  usuarios,
-  setUsuarios,
-  setNombre,
-  setEdad,
-  setFechadenac,
-  setEditingUserId,
-}) => {
-  const editarUsuario = (id) => {
-    const toEditUsuario = usuarios.find((user) => user.id === id);
-    if (toEditUsuario) {
-      setNombre(toEditUsuario.nombre);
-      setEdad(toEditUsuario.edad);
-      setFechadenac(toEditUsuario.fechadenac);
-      setEditingUserId(id);
-    }
-  };
-
-  function eliminarUsuario(id) {
-    const nuevosUsuario = usuarios.filter((usuario) => usuario.id !== id);
-    setUsuarios(nuevosUsuario);
-    setNombre("");
-    setEdad("");
-    setFechadenac("");
-    setEditingUserId(null);
-  }
+const ListaUsuario = () => {
+ const {
+   usuarios,
+   editarUsuario,
+   eliminarUsuario,
+ } = useContext(UserContext);
 
   return (
     <table>
@@ -42,7 +23,7 @@ const ListaUsuario = ({
       </thead>
       <tbody>
         {usuarios.map((usuario, id) => (
-          <tr key={id}>
+          <tr key={usuario.id}>
             <td>{usuario.nombre}</td>
             <td>{usuario.edad}</td>
             <td>{usuario.fechadenac}</td>
