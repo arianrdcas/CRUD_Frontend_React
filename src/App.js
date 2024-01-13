@@ -1,7 +1,7 @@
 import "./App.css";
-import { BiEdit } from "react-icons/bi";
-import { BiTrash } from "react-icons/bi";
 import React, { useState } from "react";
+import Formulario from "./componente/Formulario";
+import ListaUsuario from "./componente/ListaUsuario";
 
 function App() {
   const [nombre, setNombre] = useState("");
@@ -9,14 +9,6 @@ function App() {
   const [fechadenac, setFechadenac] = useState("");
   const [usuarios, setUsuarios] = useState([]);
   const [editingUserId, setEditingUserId] = useState(null);
-
-
-const handleKeyPress = (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-  }
-  enviando(e);
-};
 
   const enviando = (e) => {
     e.preventDefault();
@@ -38,94 +30,33 @@ const handleKeyPress = (e) => {
     setNombre("");
     setEdad("");
     setFechadenac("");
+    setEditingUserId(null)
   };
 
-  
-
-  const editarUsuario = (id) => {
-    const toEditUsuario = usuarios.find((user) => user.id === id);
-    if (toEditUsuario) {
-      setNombre(toEditUsuario.nombre);
-      setEdad(toEditUsuario.edad);
-      setFechadenac(toEditUsuario.fechadenac);
-      setEditingUserId(id);
-    }
-  };
-
-  function eliminarUsuario(id) {
-    const nuevosUsuario = usuarios.filter((usuario) => usuario.id !== id);
-    setUsuarios(nuevosUsuario);
-  }
-
+ 
   return (
     <>
       <div className="app-usuarios">
         <h1>Registro usuarios</h1>
         <div className="contenedor-principal">
-          <form className="contenedor-formulario" onSubmit={enviando}>
-            <input
-              className="input"
-              placeholder="Introduce tu nombre"
-              name="nombre"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              onKeyPress={handleKeyPress}
-            ></input>
-            <input
-              className="input"
-              placeholder="Introduce tu edad"
-              name="edad"
-              value={edad}
-              onChange={(e) => setEdad(e.target.value)}
-              onKeyPress={handleKeyPress}
-            ></input>
-            <input
-              className="input"
-              placeholder="Introduce tu fecha de nacimiento"
-              name="fechadenac"
-              value={fechadenac}
-              onChange={(e) => setFechadenac(e.target.value)}
-              onKeyPress={handleKeyPress}
-            ></input>
-            <div className="contenedor-boton">
-              <button className="boton-agregar-usuario">
-                {editingUserId !== null ? "Actualizar" : "Agregar"}
-              </button>
-            </div>
-          </form>
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Editar / Eliminar</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuarios.map((usuario, id) => (
-                <tr key={id}>
-                  <td>{usuario.nombre}</td>
-                  <td>{usuario.edad}</td>
-                  <td>{usuario.fechadenac}</td>
-                  <td className="editar-eliminar">
-                    <button
-                      className="boton-eliminar-editar"
-                      onClick={() => editarUsuario(usuario.id)}
-                    >
-                      <BiEdit />
-                    </button>
-                    <button
-                      className="boton-eliminar-editar"
-                      onClick={() => eliminarUsuario(usuario.id)}
-                    >
-                      <BiTrash />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Formulario
+            enviando={enviando}
+            nombre={nombre}
+            edad={edad}
+            fechadenac={fechadenac}
+            editingUserId={editingUserId}
+            setNombre={setNombre}
+            setEdad={setEdad}
+            setFechadenac={setFechadenac}
+          />
+          <ListaUsuario
+            setNombre={setNombre}
+            setEdad={setEdad}
+            setFechadenac={setFechadenac}
+            setEditingUserId={setEditingUserId}
+            usuarios={usuarios}
+            setUsuarios={setUsuarios}
+          />
         </div>
       </div>
     </>

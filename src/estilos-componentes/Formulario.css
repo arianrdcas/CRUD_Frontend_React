@@ -1,0 +1,35 @@
+.contenedor-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
+.input {
+  flex: 1;   
+  width: 150px;
+  height: 28px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid black;
+  margin-right: 2px;
+  outline: none;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.input:last-child {
+  margin-right: 0;
+}
+
+.boton-agregar-usuario{
+    width: 100px;
+    padding: 5px;
+    font-size: 13;
+    color: white;
+    background-color: rgb(4, 0, 128);
+    box-sizing: border-box;
+    border: 1px solid black;
+    cursor: pointer;
+}

@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  background: none;
+  background-color: #d0d0d5;
+  width: 25%;
+}
+
+th {
+  background-color: #d0d0d5;
+}
+
+
+.boton-eliminar-editar{
+    font-size: 25px;
+    color: #d0d0d5;
+    margin:5px;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+}
